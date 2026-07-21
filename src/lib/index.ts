@@ -1,5 +1,5 @@
 export interface World {
-  color: "GRAY" | "BLUE" | "BROWN" | "GREEN" | "YELLOW";
+  good?: "NOVELTY" | "RARE" | "GENE" | "ALIEN";
   isMilitary?: boolean;
   isWindfall?: boolean;
   type?: "START_BLUE" | "START_RED" | "NEAR" | "FAR";
@@ -7,7 +7,7 @@ export interface World {
 
 export type Power = "I" | "II" | "III" | "$" | "IV" | "V";
 export type Keyword =
-  | "CHROMOSOME"
+  | "CHROMO"
   | "ANTI-XENO"
   | "XENO"
   | "UPLIFT"

@@ -3,7 +3,8 @@
 </script>
 
 <svelte:head>
-  <title>Card Library - Race for the Galaxy Arc 3</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+  <title>Card Gallery - Race for the Galaxy Arc 3</title>
 </svelte:head>
 
 {@render children()}
