@@ -4,8 +4,9 @@
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
 
-  let columnsPerRow = $state(4);
+  let columnsPerRow = $state(8);
   let searchTerm = $state("");
+  let hideDevDuplicates = $state(false);
   let activeTags: string[] = $state([]);
 
   const filterGroups = [
@@ -54,7 +55,9 @@
 
   let results: Card[] = $derived.by(() => {
     if (activeTags.length === 0 && searchTerm.trim() === "") {
-      return allCards;
+      const allCardsCopy = [...allCards];
+      addDevDuplicates(allCardsCopy);
+      return allCardsCopy;
     }
 
     const filteredCards = allCards.filter((card) => {
@@ -63,98 +66,168 @@
         .includes(searchTerm.toLowerCase());
       if (!matchesSearchTerm) return false;
 
-      ////// check each group. if has none in group then pass. else only matching tag(s) in this group can pass
-
       // Card Type
+      const activeCardTypeTags = activeTags.filter((tag) =>
+        filterGroups[0].tags.includes(tag),
+      );
+      if (activeCardTypeTags.length > 0) {
+        const matchesCardType = activeCardTypeTags.some((tag) => {
+          if (tag === "Development") {
+            return card.world === undefined;
+          }
+          if (tag === "Non-military World") {
+            return card.world?.isMilitary === undefined;
+          }
+          if (tag === "Military World") {
+            return card.world?.isMilitary === true;
+          }
+        });
+        if (!matchesCardType) return false;
+      }
 
-      /*
-      return activeTags.every((tag) => {
-        // Card type tags
-        if (tag === "Development") {
-          return card.world === undefined;
-        }
-        if (tag === "Non-military World") {
-          return card.world?.isMilitary === undefined;
-        }
-        if (tag === "Military World") {
-          return card.world?.isMilitary === true;
-        }
+      // World Type
+      const activeWorldTypeTags = activeTags.filter((tag) =>
+        filterGroups[1].tags.includes(tag),
+      );
+      if (activeWorldTypeTags.length > 0) {
+        // must be world
+        if (card.world === undefined) return false;
+        const matchesWorldType = activeWorldTypeTags.some((tag) => {
+          if (tag === "Near Frontier") {
+            return card.world?.type === "NEAR";
+          }
+          if (tag === "Far Frontier") {
+            return card.world?.type === "FAR";
+          }
+          if (tag === "Start Worlds") {
+            return (
+              card.world?.type === "START_BLUE" ||
+              card.world?.type === "START_RED"
+            );
+          }
+          if (tag === "Other Worlds") {
+            return card.world?.type === undefined;
+          }
+        });
+        if (!matchesWorldType) return false;
+      }
 
-        // VP and cost tags
-        if (tag.startsWith("VP: ")) {
-          const vpValue = parseInt(tag.split(": ")[1]);
-          return card.vp === vpValue;
-        }
-        if (tag.startsWith("$")) {
+      // Cost / Defense
+      const activeCostTags = activeTags.filter((tag) =>
+        filterGroups[2].tags.includes(tag),
+      );
+      if (activeCostTags.length > 0) {
+        const matchesCost = activeCostTags.some((tag) => {
           const costValue = parseInt(tag.slice(1));
           return card.cost === costValue;
-        }
+        });
+        if (!matchesCost) return false;
+      }
 
-        // Production / Windfall tags
-        if (tag === "Production") {
-          return card.world?.isWindfall === undefined;
-        }
-        if (tag === "Windfall") {
-          return card.world?.isWindfall === true;
-        }
+      // VP
+      const activeVPTags = activeTags.filter((tag) =>
+        filterGroups[3].tags.includes(tag),
+      );
+      if (activeVPTags.length > 0) {
+        const matchesVP = activeVPTags.some((tag) => {
+          const vpValue = parseInt(tag.slice(4));
+          return card.vp === vpValue;
+        });
+        if (!matchesVP) return false;
+      }
 
-        // World type tags
-        if (tag === "Near Frontier") {
-          return card.world?.type === "NEAR";
-        }
-        if (tag === "Far Frontier") {
-          return card.world?.type === "FAR";
-        }
-        if (tag === "Start Worlds") {
-          return (
-            card.world?.type === "START_BLUE" ||
-            card.world?.type === "START_RED"
-          );
-        }
-        if (tag === "Other Worlds") {
-          return card.world?.type === undefined;
-        }
+      // Keywords
+      const activeKeywordTags = activeTags.filter((tag) =>
+        filterGroups[4].tags.includes(tag),
+      );
+      if (activeKeywordTags.length > 0) {
+        if (!card.keywords) return false; // card has no keywords
+        const matchesKeyword = activeKeywordTags.some((tag) => {
+          return card.keywords?.includes(tag as Keyword);
+        });
+        if (!matchesKeyword) return false;
+      }
 
-        // Good color tags
-        if (tag === "gray") {
-          return card.world?.good === undefined;
-        }
-        if (tag === "blue") {
-          return card.world?.good === "NOVELTY";
-        }
-        if (tag === "brown") {
-          return card.world?.good === "RARE";
-        }
-        if (tag === "green") {
-          return card.world?.good === "GENE";
-        }
-        if (tag === "yellow") {
-          return card.world?.good === "ALIEN";
-        }
+      // Phase with powers
+      const activePhaseTags = activeTags.filter((tag) =>
+        filterGroups[5].tags.includes(tag),
+      );
+      if (activePhaseTags.length > 0) {
+        const matchesPhase = activePhaseTags.some((tag) => {
+          return card.powers.includes(tag as Power);
+        });
+        if (!matchesPhase) return false;
+      }
 
-        // Keyword tags
-        return card.keywords?.includes(tag as Keyword);
-      });
-      */
+      // Good Color
+      const activeGoodColorTags = activeTags.filter((tag) =>
+        filterGroups[6].tags.includes(tag),
+      );
+      if (activeGoodColorTags.length > 0) {
+        // must be world
+        if (card.world === undefined) return false;
+        const matchesGoodColor = activeGoodColorTags.some((tag) => {
+          if (tag === "gray") {
+            return card.world?.good === undefined;
+          }
+          if (tag === "blue") {
+            return card.world?.good === "NOVELTY";
+          }
+          if (tag === "brown") {
+            return card.world?.good === "RARE";
+          }
+          if (tag === "green") {
+            return card.world?.good === "GENE";
+          }
+          if (tag === "yellow") {
+            return card.world?.good === "ALIEN";
+          }
+        });
+        if (!matchesGoodColor) return false;
+      }
+
+      // Production / Windfall
+      const activeProductionWindfallTags = activeTags.filter((tag) =>
+        filterGroups[7].tags.includes(tag),
+      );
+      if (activeProductionWindfallTags.length > 0) {
+        if (card.world?.good === undefined) return false; // must have good to be production or windfall
+        const matchesProductionWindfall = activeProductionWindfallTags.some(
+          (tag) => {
+            if (tag === "Production") {
+              return card.world?.isWindfall === undefined;
+            }
+            if (tag === "Windfall") {
+              return card.world?.isWindfall === true;
+            }
+          },
+        );
+        if (!matchesProductionWindfall) return false;
+      }
+
+      return true;
     });
 
-    // add a copy of each development card, except if the cost is 6 or 9
+    addDevDuplicates(filteredCards);
+    return filteredCards;
+  });
+
+  function addDevDuplicates(filteredCards: Card[]) {
+    // add a copy of each development card, except for the ones with cost of 6 or 9
+    if (hideDevDuplicates) return;
     for (let i = filteredCards.length - 1; i >= 0; i--) {
       const card = filteredCards[i];
       if (card.world === undefined && card.cost !== 6 && card.cost !== 9) {
         filteredCards.splice(i, 0, card);
       }
     }
-
-    return filteredCards;
-  });
+  }
 
   function toggleTag(tag: string) {
     if (activeTags.includes(tag)) {
       activeTags = activeTags.filter((value) => value !== tag);
       return;
     }
-
     activeTags = [...activeTags, tag];
   }
 </script>
@@ -202,21 +275,6 @@
     {/each}
   </div>
 
-  <div class="search-section">
-    <input
-      type="text"
-      placeholder="Filter by name"
-      bind:value={searchTerm}
-      class="search-input"
-    />
-    <div>
-      <input type="checkbox" id="hideDevDuplicates" />
-      <label for="hideDevDuplicates" style="cursor: pointer;"
-        >Hide development duplicates</label
-      >
-    </div>
-  </div>
-
   <div class="active-tags-section">
     <div class="active-tags-label">Active Filters (click to remove)</div>
 
@@ -238,6 +296,25 @@
     </div>
   </div>
 
+  <div class="search-section">
+    <input
+      type="text"
+      placeholder="Filter by name"
+      bind:value={searchTerm}
+      class="search-input"
+    />
+    <div>
+      <input
+        type="checkbox"
+        id="hideDevDuplicates"
+        bind:checked={hideDevDuplicates}
+      />
+      <label for="hideDevDuplicates" style="cursor: pointer;"
+        >Hide development duplicates</label
+      >
+    </div>
+  </div>
+
   <div class="slider-section">
     <label for="columnsSlider"
       >Columns per row: <span class="slider-value">{columnsPerRow}</span></label
@@ -246,10 +323,14 @@
       id="columnsSlider"
       type="range"
       min="3"
-      max="6"
+      max="8"
       bind:value={columnsPerRow}
       class="columns-slider"
     />
+  </div>
+
+  <div>
+    <p class="result-count">{results.length} results</p>
   </div>
 
   <div class="results-section" style="--columns: {columnsPerRow}">
@@ -331,6 +412,14 @@
     cursor: pointer;
   }
 
+  .result-count {
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+  }
+
   .filters-section {
     display: grid;
     gap: 18px;
@@ -344,6 +433,7 @@
     background: #161824;
     border-radius: 12px;
     padding: 14px;
+    margin-bottom: 24px;
   }
 
   .filter-group-label,
@@ -473,7 +563,7 @@
 
   @media (max-width: 768px) {
     .container {
-      padding: 16px;
+      padding: 12px;
     }
 
     .filters-section {

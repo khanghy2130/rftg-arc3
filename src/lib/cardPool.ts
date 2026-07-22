@@ -4,7 +4,6 @@ export const allCards: Card[] = [
   {
     src: "cards/gateway-station.jpg",
     name: "Gateway Station",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["IV"],
@@ -17,7 +16,6 @@ export const allCards: Card[] = [
   {
     src: "cards/abandoned-mine-squatters.jpg",
     name: "Abandoned Mine Squatters",
-    keywords: [],
     cost: 2,
     vp: 0,
     powers: ["III", "V"],
@@ -30,7 +28,6 @@ export const allCards: Card[] = [
   {
     src: "cards/terraforming-colonists.jpg",
     name: "Terraforming Colonists",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III", "V"],
@@ -41,7 +38,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-trade-emissaries.jpg",
     name: "Galactic Trade Emissaries",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III", "IV"],
@@ -52,7 +48,6 @@ export const allCards: Card[] = [
   {
     src: "cards/industrial-robots.jpg",
     name: "Industrial Robots",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["II", "V"],
@@ -63,7 +58,6 @@ export const allCards: Card[] = [
   {
     src: "cards/star-nomad-raiders.jpg",
     name: "Star Nomad Raiders",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III", "$"],
@@ -75,7 +69,6 @@ export const allCards: Card[] = [
   {
     src: "cards/old-earth.jpg",
     name: "Old Earth",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["$", "IV"],
@@ -86,7 +79,6 @@ export const allCards: Card[] = [
   {
     src: "cards/epsilon-eridani.jpg",
     name: "Epsilon Eridani",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III", "IV"],
@@ -97,7 +89,6 @@ export const allCards: Card[] = [
   {
     src: "cards/alpha-centauri.jpg",
     name: "Alpha Centauri",
-    keywords: [],
     cost: 2,
     vp: 0,
     powers: ["III"],
@@ -110,7 +101,6 @@ export const allCards: Card[] = [
   {
     src: "cards/new-sparta.jpg",
     name: "New Sparta",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III"],
@@ -122,7 +112,6 @@ export const allCards: Card[] = [
   {
     src: "cards/earths-lost-colony.jpg",
     name: "Earth's Lost Colony",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["IV", "V"],
@@ -147,7 +136,6 @@ export const allCards: Card[] = [
   {
     src: "cards/public-works.jpg",
     name: "Public Works",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["II", "IV"],
@@ -155,7 +143,6 @@ export const allCards: Card[] = [
   {
     src: "cards/gem-world.jpg",
     name: "Gem World",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["V"],
@@ -166,7 +153,6 @@ export const allCards: Card[] = [
   {
     src: "cards/colony-ship.jpg",
     name: "Colony Ship",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III"],
@@ -174,7 +160,6 @@ export const allCards: Card[] = [
   {
     src: "cards/comet-zone.jpg",
     name: "Comet Zone",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["V"],
@@ -185,7 +170,6 @@ export const allCards: Card[] = [
   {
     src: "cards/expedition-force.jpg",
     name: "Expedition Force",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["I", "III"],
@@ -193,7 +177,6 @@ export const allCards: Card[] = [
   {
     src: "cards/mining-robots.jpg",
     name: "Mining Robots",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III", "V"],
@@ -213,7 +196,6 @@ export const allCards: Card[] = [
   {
     src: "cards/export-duties.jpg",
     name: "Export Duties",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["$"],
@@ -221,7 +203,6 @@ export const allCards: Card[] = [
   {
     src: "cards/former-penal-colony.jpg",
     name: "Former Penal Colony",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III"],
@@ -234,7 +215,6 @@ export const allCards: Card[] = [
   {
     src: "cards/malevolent-lifeforms.jpg",
     name: "Malevolent Lifeforms",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["I", "V"],
@@ -246,7 +226,6 @@ export const allCards: Card[] = [
   {
     src: "cards/new-military-tactics.jpg",
     name: "New Military Tactics",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["III"],
@@ -254,7 +233,6 @@ export const allCards: Card[] = [
   {
     src: "cards/space-marines.jpg",
     name: "Space Marines",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III"],
@@ -262,7 +240,6 @@ export const allCards: Card[] = [
   {
     src: "cards/contact-specialist.jpg",
     name: "Contact Specialist",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["III"],
@@ -283,7 +260,6 @@ export const allCards: Card[] = [
   {
     src: "cards/spice-world.jpg",
     name: "Spice World",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["$", "V"],
@@ -294,7 +270,6 @@ export const allCards: Card[] = [
   {
     src: "cards/lost-species-ark-world.jpg",
     name: "Lost Species Ark World",
-    keywords: [],
     cost: 5,
     vp: 3,
     powers: ["V"],
@@ -305,7 +280,6 @@ export const allCards: Card[] = [
   {
     src: "cards/new-vinland.jpg",
     name: "New Vinland",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["IV", "V"],
@@ -316,7 +290,6 @@ export const allCards: Card[] = [
   {
     src: "cards/artist-colony.jpg",
     name: "Artist Colony",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["V"],
@@ -338,7 +311,6 @@ export const allCards: Card[] = [
   {
     src: "cards/plague-world.jpg",
     name: "Plague World",
-    keywords: [],
     cost: 3,
     vp: 0,
     powers: ["IV", "V"],
@@ -349,7 +321,6 @@ export const allCards: Card[] = [
   {
     src: "cards/distant-world.jpg",
     name: "Distant World",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["$", "V"],
@@ -395,7 +366,6 @@ export const allCards: Card[] = [
   {
     src: "cards/new-survivalists.jpg",
     name: "New Survivalists",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["IV", "V"],
@@ -407,7 +377,6 @@ export const allCards: Card[] = [
   {
     src: "cards/outlaw-world.jpg",
     name: "Outlaw World",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["III", "IV"],
@@ -430,7 +399,6 @@ export const allCards: Card[] = [
   {
     src: "cards/diversified-economy.jpg",
     name: "Diversified Economy",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["IV", "V"],
@@ -438,7 +406,6 @@ export const allCards: Card[] = [
   {
     src: "cards/consumer-markets.jpg",
     name: "Consumer Markets",
-    keywords: [],
     cost: 5,
     vp: 3,
     powers: ["IV", "V"],
@@ -446,7 +413,6 @@ export const allCards: Card[] = [
   {
     src: "cards/mining-conglomerate.jpg",
     name: "Mining Conglomerate",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["$", "IV", "V"],
@@ -454,7 +420,6 @@ export const allCards: Card[] = [
   {
     src: "cards/research-labs.jpg",
     name: "Research Labs",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["I", "IV", "V"],
@@ -462,7 +427,6 @@ export const allCards: Card[] = [
   {
     src: "cards/deficit-spending.jpg",
     name: "Deficit Spending",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["IV"],
@@ -470,7 +434,6 @@ export const allCards: Card[] = [
   {
     src: "cards/investment-credits.jpg",
     name: "Investment Credits",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["II"],
@@ -478,7 +441,6 @@ export const allCards: Card[] = [
   {
     src: "cards/pan-galactic-league.jpg",
     name: "Pan-Galactic League",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["III", "V"],
@@ -486,7 +448,6 @@ export const allCards: Card[] = [
   {
     src: "cards/mining-league.jpg",
     name: "Mining League",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["IV", "V"],
@@ -494,7 +455,6 @@ export const allCards: Card[] = [
   {
     src: "cards/free-trade-association.jpg",
     name: "Free Trade Association",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["IV", "V"],
@@ -510,7 +470,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-survey-seti.jpg",
     name: "Galactic Survey: SETI",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["I"],
@@ -518,7 +477,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-federation.jpg",
     name: "Galactic Federation",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["II"],
@@ -526,7 +484,6 @@ export const allCards: Card[] = [
   {
     src: "cards/refugee-world.jpg",
     name: "Refugee World",
-    keywords: [],
     cost: 0,
     vp: 1,
     powers: ["III"],
@@ -538,7 +495,6 @@ export const allCards: Card[] = [
   {
     src: "cards/empath-world.jpg",
     name: "Empath World",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["III"],
@@ -550,7 +506,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-resort.jpg",
     name: "Galactic Resort",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["IV"],
@@ -562,7 +517,6 @@ export const allCards: Card[] = [
   {
     src: "cards/pre-sentient-race.jpg",
     name: "Pre-Sentient Race",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: [],
@@ -598,7 +552,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-engineers.jpg",
     name: "Galactic Engineers",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["$", "V"],
@@ -607,7 +560,6 @@ export const allCards: Card[] = [
   {
     src: "cards/black-market-trading-world.jpg",
     name: "Black Market Trading World",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["$"],
@@ -616,7 +568,6 @@ export const allCards: Card[] = [
   {
     src: "cards/merchant-world.jpg",
     name: "Merchant World",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["$", "IV"],
@@ -625,7 +576,6 @@ export const allCards: Card[] = [
   {
     src: "cards/tourist-world.jpg",
     name: "Tourist World",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["IV"],
@@ -634,7 +584,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-trendsetters.jpg",
     name: "Galactic Trendsetters",
-    keywords: [],
     cost: 5,
     vp: 3,
     powers: ["IV"],
@@ -652,7 +601,6 @@ export const allCards: Card[] = [
   {
     src: "cards/star-nomad-lair.jpg",
     name: "Star Nomad Lair",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["I", "$"],
@@ -691,7 +639,6 @@ export const allCards: Card[] = [
   {
     src: "cards/pirate-world.jpg",
     name: "Pirate World",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["$"],
@@ -743,7 +690,6 @@ export const allCards: Card[] = [
   {
     src: "cards/runaway-robots.jpg",
     name: "Runaway Robots",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["V"],
@@ -756,7 +702,6 @@ export const allCards: Card[] = [
   {
     src: "cards/interstellar-bank.jpg",
     name: "Interstellar Bank",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["II"],
@@ -772,7 +717,6 @@ export const allCards: Card[] = [
   {
     src: "cards/drop-ships.jpg",
     name: "Drop Ships",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["III"],
@@ -780,7 +724,6 @@ export const allCards: Card[] = [
   {
     src: "cards/new-galactic-order.jpg",
     name: "New Galactic Order",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["III"],
@@ -788,7 +731,6 @@ export const allCards: Card[] = [
   {
     src: "cards/asteroid-belt.jpg",
     name: "Asteroid Belt",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: [],
@@ -800,7 +742,6 @@ export const allCards: Card[] = [
   {
     src: "cards/merchant-guild.jpg",
     name: "Merchant Guild",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["V"],
@@ -808,7 +749,6 @@ export const allCards: Card[] = [
   {
     src: "cards/secluded-world.jpg",
     name: "Secluded World",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["IV", "V"],
@@ -830,7 +770,6 @@ export const allCards: Card[] = [
   {
     src: "cards/terraformed-world.jpg",
     name: "Terraformed World",
-    keywords: [],
     cost: 5,
     vp: 5,
     powers: ["IV"],
@@ -839,7 +778,6 @@ export const allCards: Card[] = [
   {
     src: "cards/replicant-robots.jpg",
     name: "Replicant Robots",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["III"],
@@ -847,7 +785,6 @@ export const allCards: Card[] = [
   {
     src: "cards/pilgrimage-world.jpg",
     name: "Pilgrimage World",
-    keywords: [],
     cost: 0,
     vp: 2,
     powers: ["IV"],
@@ -867,7 +804,6 @@ export const allCards: Card[] = [
   {
     src: "cards/new-economy.jpg",
     name: "New Economy",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["IV"],
@@ -875,7 +811,6 @@ export const allCards: Card[] = [
   {
     src: "cards/radioactive-world.jpg",
     name: "Radioactive World",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: [],
@@ -900,7 +835,6 @@ export const allCards: Card[] = [
   {
     src: "cards/genetics-lab.jpg",
     name: "Genetics Lab",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["$", "V"],
@@ -908,7 +842,6 @@ export const allCards: Card[] = [
   {
     src: "cards/bio-hazard-mining-world.jpg",
     name: "Bio-Hazard Mining World",
-    keywords: [],
     cost: 2,
     vp: 0,
     powers: ["$", "V"],
@@ -931,7 +864,6 @@ export const allCards: Card[] = [
   {
     src: "cards/destroyed-world.jpg",
     name: "Destroyed World",
-    keywords: [],
     cost: 1,
     vp: 0,
     powers: [],
@@ -943,7 +875,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-renaissance.jpg",
     name: "Galactic Renaissance",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["I"],
@@ -951,7 +882,6 @@ export const allCards: Card[] = [
   {
     src: "cards/blaster-gem-mines.jpg",
     name: "Blaster Gem Mines",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["III"],
@@ -963,7 +893,6 @@ export const allCards: Card[] = [
   {
     src: "cards/gambling-world.jpg",
     name: "Gambling World",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["IV"],
@@ -972,7 +901,6 @@ export const allCards: Card[] = [
   {
     src: "cards/expanding-colony.jpg",
     name: "Expanding Colony",
-    keywords: [],
     cost: 1,
     vp: 1,
     powers: ["IV", "V"],
@@ -981,7 +909,6 @@ export const allCards: Card[] = [
   {
     src: "cards/space-port.jpg",
     name: "Space Port",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["$", "V"],
@@ -992,7 +919,6 @@ export const allCards: Card[] = [
   {
     src: "cards/prosperous-world.jpg",
     name: "Prosperous World",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["IV", "V"],
@@ -1003,7 +929,6 @@ export const allCards: Card[] = [
   {
     src: "cards/new-earth.jpg",
     name: "New Earth",
-    keywords: [],
     cost: 5,
     vp: 3,
     powers: ["IV", "V"],
@@ -1033,7 +958,6 @@ export const allCards: Card[] = [
   {
     src: "cards/trade-league.jpg",
     name: "Trade League",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["$"],
@@ -1041,7 +965,6 @@ export const allCards: Card[] = [
   {
     src: "cards/mining-world.jpg",
     name: "Mining World",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["V"],
@@ -1064,7 +987,6 @@ export const allCards: Card[] = [
   {
     src: "cards/starry-rift-pioneers.jpg",
     name: "Starry Rift Pioneers",
-    keywords: [],
     cost: 2,
     vp: 0,
     powers: ["III", "V"],
@@ -1100,7 +1022,6 @@ export const allCards: Card[] = [
   {
     src: "cards/anti-xeno-defense-post.jpg",
     name: "Anti-Xeno Defense Post",
-    keywords: [],
     cost: 2,
     vp: 2,
     powers: ["III", "V"],
@@ -1123,7 +1044,6 @@ export const allCards: Card[] = [
   {
     src: "cards/anti-xeno-embassy.jpg",
     name: "Anti-Xeno Embassy",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III", "IV", "V"],
@@ -1134,7 +1054,6 @@ export const allCards: Card[] = [
   {
     src: "cards/novelty-peddlers.jpg",
     name: "Novelty Peddlers",
-    keywords: [],
     cost: 2,
     vp: 1,
     powers: ["III", "$", "IV"],
@@ -1146,7 +1065,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-clearing-house.jpg",
     name: "Galactic Clearing House",
-    keywords: [],
     cost: 5,
     vp: 3,
     powers: ["$", "IV", "V"],
@@ -1255,7 +1173,6 @@ export const allCards: Card[] = [
   {
     src: "cards/anti-xeno-refugees.jpg",
     name: "Anti-Xeno Refugees",
-    keywords: [],
     cost: 2,
     vp: 0,
     powers: ["III"],
@@ -1267,7 +1184,6 @@ export const allCards: Card[] = [
   {
     src: "cards/pan-galactic-disease-center.jpg",
     name: "Pan-Galactic Disease Center",
-    keywords: [],
     cost: 3,
     vp: 1,
     powers: ["III", "V"],
@@ -1339,7 +1255,6 @@ export const allCards: Card[] = [
   {
     src: "cards/alien-archives.jpg",
     name: "Alien Archives",
-    keywords: [],
     cost: 5,
     vp: 4,
     powers: ["III", "V"],
@@ -1422,7 +1337,6 @@ export const allCards: Card[] = [
   {
     src: "cards/anti-xeno-militia.jpg",
     name: "Anti-Xeno Militia",
-    keywords: [],
     cost: 1,
     vp: 0,
     powers: ["III"],
@@ -1446,7 +1360,6 @@ export const allCards: Card[] = [
   {
     src: "cards/anti-xeno-assault-troops.jpg",
     name: "Anti-Xeno Assault Troops",
-    keywords: [],
     cost: 3,
     vp: 2,
     powers: ["III"],
@@ -1462,7 +1375,6 @@ export const allCards: Card[] = [
   {
     src: "cards/construction-corps.jpg",
     name: "Construction Corps",
-    keywords: [],
     cost: 4,
     vp: 2,
     powers: ["II", "V"],
@@ -1470,7 +1382,6 @@ export const allCards: Card[] = [
   {
     src: "cards/galactic-home-front.jpg",
     name: "Galactic Home Front",
-    keywords: [],
     cost: 5,
     vp: 3,
     powers: ["III", "IV", "V"],
@@ -1518,7 +1429,6 @@ export const allCards: Card[] = [
   {
     src: "cards/anti-xeno-league.jpg",
     name: "Anti-Xeno League",
-    keywords: [],
     cost: 6,
     vp: "?",
     powers: ["III", "V"],

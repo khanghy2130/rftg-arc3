@@ -19,7 +19,7 @@ export type Keyword =
 export interface Card {
   src: string;
   name: string;
-  keywords: Keyword[];
+  keywords?: Keyword[];
   cost: number;
   vp: number | "?";
   powers: Power[];
