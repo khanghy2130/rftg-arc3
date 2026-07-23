@@ -24,4 +24,5 @@ export interface Card {
   vp: number | "?";
   powers: Power[];
   world?: World;
+  set?: "xi" | "xc";
 }

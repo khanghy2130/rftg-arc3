@@ -9,49 +9,37 @@
   let hideDevDuplicates = $state(false);
   let activeTags: string[] = $state([]);
 
-  const filterGroups = [
-    {
-      label: "Card Type",
-      tags: ["Development", "Non-military World", "Military World"],
-    },
-    {
-      label: "World Type",
-      tags: ["Near Frontier", "Far Frontier", "Start Worlds", "Other Worlds"],
-    },
-    {
-      label: "Cost / Defense",
-      tags: Array.from({ length: 11 }, (_, index) => `${"$" + index}`),
-    },
-    {
-      label: "VP",
-      tags: Array.from({ length: 11 }, (_, index) => `${"VP: " + (index - 1)}`),
-    },
-    {
-      label: "Keywords",
-      tags: [
-        "CHROMO",
-        "ANTI-XENO",
-        "XENO",
-        "UPLIFT",
-        "REBEL",
-        "IMPERIUM",
-        "ALIEN",
-        "TERRAFORMING",
-      ],
-    },
-    {
-      label: "Phase",
-      tags: ["I", "II", "III", "$", "IV", "V"],
-    },
-    {
-      label: "Good Color",
-      tags: ["gray", "blue", "brown", "green", "yellow"],
-    },
-    {
-      label: "Production / Windfall",
-      tags: ["Production", "Windfall"],
-    },
-  ];
+  const filterGroups = {
+    Set: ["Base", "Xeno Invasion", "Xeno Counterstrike"],
+    "Card Type": ["Development", "Non-military World", "Military World"],
+    Keywords: [
+      "CHROMO",
+      "ANTI-XENO",
+      "XENO",
+      "UPLIFT",
+      "REBEL",
+      "IMPERIUM",
+      "ALIEN",
+      "TERRAFORMING",
+    ],
+    "World Type": [
+      "Near Frontier",
+      "Far Frontier",
+      "Start Worlds",
+      "Other Worlds",
+    ],
+    "Cost / Defense": Array.from(
+      { length: 11 },
+      (_, index) => `${"$" + index}`,
+    ),
+    VP: [
+      ...Array.from({ length: 11 }, (_, index) => `${"VP: " + (index - 1)}`),
+      "VP: ?",
+    ],
+    "Phase Power": ["I", "II", "III", "$", "IV", "V"],
+    "Good Color": ["gray", "blue", "brown", "green", "yellow"],
+    "Production / Windfall": ["Production", "Windfall"],
+  };
 
   let results: Card[] = $derived.by(() => {
     if (activeTags.length === 0 && searchTerm.trim() === "") {
@@ -66,15 +54,35 @@
         .includes(searchTerm.toLowerCase());
       if (!matchesSearchTerm) return false;
 
+      // Set
+      const activeSetTags = activeTags.filter((tag) =>
+        filterGroups["Set"].includes(tag),
+      );
+      if (activeSetTags.length > 0) {
+        const matchesSetType = activeSetTags.some((tag) => {
+          if (tag === "Base") {
+            return card.set === undefined;
+          }
+          if (tag === "Xeno Invasion") {
+            return card.set === "xi";
+          }
+          if (tag === "Xeno Counterstrike") {
+            return card.set === "xc";
+          }
+        });
+        if (!matchesSetType) return false;
+      }
+
       // Card Type
       const activeCardTypeTags = activeTags.filter((tag) =>
-        filterGroups[0].tags.includes(tag),
+        filterGroups["Card Type"].includes(tag),
       );
       if (activeCardTypeTags.length > 0) {
         const matchesCardType = activeCardTypeTags.some((tag) => {
           if (tag === "Development") {
             return card.world === undefined;
           }
+          if (card.world === undefined) return false; // this card is not a world
           if (tag === "Non-military World") {
             return card.world?.isMilitary === undefined;
           }
@@ -87,7 +95,7 @@
 
       // World Type
       const activeWorldTypeTags = activeTags.filter((tag) =>
-        filterGroups[1].tags.includes(tag),
+        filterGroups["World Type"].includes(tag),
       );
       if (activeWorldTypeTags.length > 0) {
         // must be world
@@ -114,7 +122,7 @@
 
       // Cost / Defense
       const activeCostTags = activeTags.filter((tag) =>
-        filterGroups[2].tags.includes(tag),
+        filterGroups["Cost / Defense"].includes(tag),
       );
       if (activeCostTags.length > 0) {
         const matchesCost = activeCostTags.some((tag) => {
@@ -126,19 +134,21 @@
 
       // VP
       const activeVPTags = activeTags.filter((tag) =>
-        filterGroups[3].tags.includes(tag),
+        filterGroups["VP"].includes(tag),
       );
       if (activeVPTags.length > 0) {
         const matchesVP = activeVPTags.some((tag) => {
-          const vpValue = parseInt(tag.slice(4));
-          return card.vp === vpValue;
+          if (tag === "VP: ?") {
+            return card.vp === "?";
+          }
+          return card.vp === parseInt(tag.slice(4));
         });
         if (!matchesVP) return false;
       }
 
       // Keywords
       const activeKeywordTags = activeTags.filter((tag) =>
-        filterGroups[4].tags.includes(tag),
+        filterGroups["Keywords"].includes(tag),
       );
       if (activeKeywordTags.length > 0) {
         if (!card.keywords) return false; // card has no keywords
@@ -150,7 +160,7 @@
 
       // Phase with powers
       const activePhaseTags = activeTags.filter((tag) =>
-        filterGroups[5].tags.includes(tag),
+        filterGroups["Phase Power"].includes(tag),
       );
       if (activePhaseTags.length > 0) {
         const matchesPhase = activePhaseTags.some((tag) => {
@@ -161,7 +171,7 @@
 
       // Good Color
       const activeGoodColorTags = activeTags.filter((tag) =>
-        filterGroups[6].tags.includes(tag),
+        filterGroups["Good Color"].includes(tag),
       );
       if (activeGoodColorTags.length > 0) {
         // must be world
@@ -188,7 +198,7 @@
 
       // Production / Windfall
       const activeProductionWindfallTags = activeTags.filter((tag) =>
-        filterGroups[7].tags.includes(tag),
+        filterGroups["Production / Windfall"].includes(tag),
       );
       if (activeProductionWindfallTags.length > 0) {
         if (card.world?.good === undefined) return false; // must have good to be production or windfall
@@ -233,7 +243,7 @@
 </script>
 
 <div class="container">
-  <h1>Card Gallery - Race for the Galaxy Arc 3</h1>
+  <h1 id="PageTitle">Card Gallery - Race for the Galaxy Arc 3</h1>
   <p>
     Fan-made card library for <a
       href="https://boardgamegeek.com/boardgame/28143"
@@ -257,11 +267,11 @@
   </p>
 
   <div class="filters-section">
-    {#each filterGroups as group}
+    {#each Object.keys(filterGroups) as (keyof typeof filterGroups)[] as groupName}
       <div class="filter-group">
-        <div class="filter-group-label">{group.label}</div>
+        <div class="filter-group-label">{groupName}</div>
         <div class="tag-row">
-          {#each group.tags as tag}
+          {#each filterGroups[groupName] as tag}
             <button
               type="button"
               class:selected={activeTags.includes(tag)}
@@ -381,6 +391,7 @@
   }
 
   .search-section {
+    margin-top: 24px;
     margin-bottom: 24px;
     display: flex;
     flex-direction: column;
@@ -433,7 +444,6 @@
     background: #161824;
     border-radius: 12px;
     padding: 14px;
-    margin-bottom: 24px;
   }
 
   .filter-group-label,
@@ -564,10 +574,19 @@
   @media (max-width: 768px) {
     .container {
       padding: 12px;
+      font-size: 16px;
+    }
+
+    #PageTitle {
+      font-size: 1.5rem;
     }
 
     .filters-section {
       grid-template-columns: 1fr;
+    }
+
+    button {
+      font-size: 0.875rem;
     }
   }
 </style>

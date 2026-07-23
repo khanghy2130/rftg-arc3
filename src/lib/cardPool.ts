@@ -983,6 +983,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       type: "START_RED",
     },
+    set: "xi",
   },
   {
     src: "cards/starry-rift-pioneers.jpg",
@@ -995,6 +996,7 @@ export const allCards: Card[] = [
       isWindfall: true,
       type: "START_BLUE",
     },
+    set: "xi",
   },
   {
     src: "cards/rebel-cadre.jpg",
@@ -1007,6 +1009,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       type: "START_RED",
     },
+    set: "xi",
   },
   {
     src: "cards/terraforming-surveyors.jpg",
@@ -1018,6 +1021,7 @@ export const allCards: Card[] = [
     world: {
       type: "START_BLUE",
     },
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-defense-post.jpg",
@@ -1029,6 +1033,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       type: "START_RED",
     },
+    set: "xi",
   },
   {
     src: "cards/uplift-descendants.jpg",
@@ -1040,6 +1045,7 @@ export const allCards: Card[] = [
     world: {
       good: "NOVELTY",
     },
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-embassy.jpg",
@@ -1050,6 +1056,7 @@ export const allCards: Card[] = [
     world: {
       good: "NOVELTY",
     },
+    set: "xi",
   },
   {
     src: "cards/novelty-peddlers.jpg",
@@ -1061,6 +1068,7 @@ export const allCards: Card[] = [
       good: "NOVELTY",
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/galactic-clearing-house.jpg",
@@ -1072,6 +1080,7 @@ export const allCards: Card[] = [
       good: "NOVELTY",
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/rebel-black-market-gangs.jpg",
@@ -1085,6 +1094,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-hostage-planet.jpg",
@@ -1098,6 +1108,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/terraforming-uplift-project.jpg",
@@ -1110,6 +1121,7 @@ export const allCards: Card[] = [
       good: "RARE",
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/corrosive-uplift-world.jpg",
@@ -1121,6 +1133,7 @@ export const allCards: Card[] = [
     world: {
       good: "RARE",
     },
+    set: "xi",
   },
   {
     src: "cards/imperium-munitions-inc.jpg",
@@ -1132,6 +1145,7 @@ export const allCards: Card[] = [
     world: {
       good: "RARE",
     },
+    set: "xi",
   },
   {
     src: "cards/rebel-bunker.jpg",
@@ -1145,6 +1159,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-held-imperium-mine.jpg",
@@ -1157,6 +1172,7 @@ export const allCards: Card[] = [
       good: "RARE",
       isMilitary: true,
     },
+    set: "xi",
   },
   {
     src: "cards/rebel-resistance.jpg",
@@ -1169,6 +1185,7 @@ export const allCards: Card[] = [
       good: "RARE",
       isMilitary: true,
     },
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-refugees.jpg",
@@ -1180,6 +1197,7 @@ export const allCards: Card[] = [
       good: "GENE",
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/pan-galactic-disease-center.jpg",
@@ -1190,6 +1208,7 @@ export const allCards: Card[] = [
     world: {
       good: "GENE",
     },
+    set: "xi",
   },
   {
     src: "cards/adaptable-uplift-race.jpg",
@@ -1202,6 +1221,7 @@ export const allCards: Card[] = [
       good: "GENE",
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-infested-uplift-world.jpg",
@@ -1215,6 +1235,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-colony.jpg",
@@ -1227,6 +1248,7 @@ export const allCards: Card[] = [
       good: "GENE",
       isMilitary: true,
     },
+    set: "xi",
   },
   {
     src: "cards/uplift-coalition.jpg",
@@ -1240,6 +1262,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-alien-bunker.jpg",
@@ -1251,6 +1274,7 @@ export const allCards: Card[] = [
     world: {
       good: "ALIEN",
     },
+    set: "xi",
   },
   {
     src: "cards/alien-archives.jpg",
@@ -1261,6 +1285,7 @@ export const allCards: Card[] = [
     world: {
       good: "ALIEN",
     },
+    set: "xi",
   },
   {
     src: "cards/alien-weapon-cache.jpg",
@@ -1274,6 +1299,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-infested-alien-outpost.jpg",
@@ -1287,6 +1313,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/alien-defense-center.jpg",
@@ -1300,6 +1327,7 @@ export const allCards: Card[] = [
       isMilitary: true,
       isWindfall: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-warrior-colony.jpg",
@@ -1311,6 +1339,7 @@ export const allCards: Card[] = [
     world: {
       isMilitary: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-occupied-rebel-world.jpg",
@@ -1322,6 +1351,7 @@ export const allCards: Card[] = [
     world: {
       isMilitary: true,
     },
+    set: "xi",
   },
   {
     src: "cards/xeno-forward-command.jpg",
@@ -1333,6 +1363,7 @@ export const allCards: Card[] = [
     world: {
       isMilitary: true,
     },
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-militia.jpg",
@@ -1340,6 +1371,7 @@ export const allCards: Card[] = [
     cost: 1,
     vp: 0,
     powers: ["III"],
+    set: "xi",
   },
   {
     src: "cards/alien-weapon-plans.jpg",
@@ -1348,6 +1380,7 @@ export const allCards: Card[] = [
     cost: 1,
     vp: 1,
     powers: ["I", "III"],
+    set: "xi",
   },
   {
     src: "cards/uplift-terraforming.jpg",
@@ -1356,6 +1389,7 @@ export const allCards: Card[] = [
     cost: 2,
     vp: 1,
     powers: ["I", "III", "V"],
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-assault-troops.jpg",
@@ -1363,6 +1397,7 @@ export const allCards: Card[] = [
     cost: 3,
     vp: 2,
     powers: ["III"],
+    set: "xi",
   },
   {
     src: "cards/imperium-arms-factory.jpg",
@@ -1371,6 +1406,7 @@ export const allCards: Card[] = [
     cost: 4,
     vp: 2,
     powers: ["III", "IV", "V"],
+    set: "xi",
   },
   {
     src: "cards/construction-corps.jpg",
@@ -1378,6 +1414,7 @@ export const allCards: Card[] = [
     cost: 4,
     vp: 2,
     powers: ["II", "V"],
+    set: "xi",
   },
   {
     src: "cards/galactic-home-front.jpg",
@@ -1385,6 +1422,7 @@ export const allCards: Card[] = [
     cost: 5,
     vp: 3,
     powers: ["III", "IV", "V"],
+    set: "xi",
   },
   {
     src: "cards/uplift-bio-engineers.jpg",
@@ -1393,6 +1431,7 @@ export const allCards: Card[] = [
     cost: 6,
     vp: "?",
     powers: ["IV", "V"],
+    set: "xi",
   },
   {
     src: "cards/imperium-war-profiteers.jpg",
@@ -1401,6 +1440,7 @@ export const allCards: Card[] = [
     cost: 6,
     vp: "?",
     powers: ["III", "V"],
+    set: "xi",
   },
   {
     src: "cards/terraforming-defenders.jpg",
@@ -1409,6 +1449,7 @@ export const allCards: Card[] = [
     cost: 6,
     vp: "?",
     powers: ["III", "IV", "V"],
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-rebel-force.jpg",
@@ -1417,6 +1458,7 @@ export const allCards: Card[] = [
     cost: 6,
     vp: "?",
     powers: ["III"],
+    set: "xi",
   },
   {
     src: "cards/alien-historians.jpg",
@@ -1425,6 +1467,7 @@ export const allCards: Card[] = [
     cost: 6,
     vp: "?",
     powers: ["I", "III", "V"],
+    set: "xi",
   },
   {
     src: "cards/anti-xeno-league.jpg",
@@ -1432,5 +1475,6 @@ export const allCards: Card[] = [
     cost: 6,
     vp: "?",
     powers: ["III", "V"],
+    set: "xi",
   },
 ];
