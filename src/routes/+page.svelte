@@ -6,7 +6,7 @@
 
   let columnsPerRow = $state(8);
   let searchTerm = $state("");
-  let hideDevDuplicates = $state(false);
+  let showDevDuplicates = $state(false);
   let activeTags: string[] = $state([]);
 
   const filterGroups = {
@@ -26,7 +26,7 @@
       "Near Frontier",
       "Far Frontier",
       "Start Worlds",
-      "Other Worlds",
+      "Non-frontier Worlds",
     ],
     "Cost / Defense": Array.from(
       { length: 11 },
@@ -99,7 +99,7 @@
       );
       if (activeWorldTypeTags.length > 0) {
         // must be world
-        if (card.world === undefined) return false;
+        // if (card.world === undefined) return false;
         const matchesWorldType = activeWorldTypeTags.some((tag) => {
           if (tag === "Near Frontier") {
             return card.world?.type === "NEAR";
@@ -113,7 +113,7 @@
               card.world?.type === "START_RED"
             );
           }
-          if (tag === "Other Worlds") {
+          if (tag === "Non-frontier Worlds") {
             return card.world?.type === undefined;
           }
         });
@@ -224,7 +224,7 @@
 
   function addDevDuplicates(filteredCards: Card[]) {
     // add a copy of each development card, except for the ones with cost of 6 or 9
-    if (hideDevDuplicates) return;
+    if (!showDevDuplicates) return;
     for (let i = filteredCards.length - 1; i >= 0; i--) {
       const card = filteredCards[i];
       if (card.world === undefined && card.cost !== 6 && card.cost !== 9) {
@@ -316,11 +316,11 @@
     <div>
       <input
         type="checkbox"
-        id="hideDevDuplicates"
-        bind:checked={hideDevDuplicates}
+        id="showDevDuplicates"
+        bind:checked={showDevDuplicates}
       />
-      <label for="hideDevDuplicates" style="cursor: pointer;"
-        >Hide development duplicates</label
+      <label for="showDevDuplicates" style="cursor: pointer;"
+        >Show development duplicates</label
       >
     </div>
   </div>
