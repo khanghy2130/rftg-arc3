@@ -24,7 +24,7 @@
       "ALIEN",
       "TERRAFORMING",
     ],
-    "World Type": [
+    "World Filtering": [
       "Near Frontier",
       "Far Frontier",
       "Start Worlds",
@@ -95,9 +95,9 @@
         if (!matchesCardType) return false;
       }
 
-      // World Type
+      // World Filtering
       const activeWorldTypeTags = activeTags.filter((tag) =>
-        filterGroups["World Type"].includes(tag),
+        filterGroups["World Filtering"].includes(tag),
       );
       // developments can pass
       if (activeWorldTypeTags.length > 0 && card.world !== undefined) {
@@ -387,9 +387,14 @@
   }
 
   h1 {
-    color: #f5f7ff;
+    color: #f7bb59;
     margin-bottom: 18px;
     font-size: 2rem;
+    background: linear-gradient(90deg, #aa7013 0%, #f7bb59 35%, #aa7013 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
   }
 
   .search-section {

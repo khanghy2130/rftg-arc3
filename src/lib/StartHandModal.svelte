@@ -1,39 +1,38 @@
 <script lang="ts">
   import type { Card } from "$lib";
   import { allCards } from "$lib/cardPool";
-  import { fade } from "svelte/transition";
+  import { scale, fade } from "svelte/transition";
 
   let modalOpen = $state(false);
   let pickedStartWorlds: Card[] = $state([]);
   let startingHand: Card[] = $state([]);
   let counter = $state(0);
 
-  const redNames = [
-    "Rebel Cadre",
-    "Alien First Contact Team",
-    "anti-xeno resistance",
-    "defense systems, inc.",
-    "New Sparta",
-    "Star Nomad Raiders",
-    "Anti-Xeno Defense Post",
-    "imperium blaster gem prospectors",
-    "Abandoned Mine Squatters",
-    "Galactic Trade Emissaries",
-    "Epsilon Eridani",
-  ];
-
   const blueNames = [
-    "Terraforming Surveyors",
-    "Industrial Robots",
-    "Terraforming Colonists",
-    "Old Earth",
+    "terraforming surveyors",
+    "industrial robots",
+    "terraforming colonists",
+    "old earth",
     "star nomad trading post",
-    "Starry Rift Pioneers",
-    "Gateway Station",
-    "Earth's Lost Colony",
-    "Alpha Centauri",
+    "starry rift pioneers",
+    "gateway station",
+    "earth's lost colony",
+    "alpha centauri",
     "frontier miners",
     "terraforming bio-engineers",
+  ];
+  const redNames = [
+    "rebel cadre",
+    "alien first contact team",
+    "anti-xeno resistance",
+    "defense systems, inc.",
+    "new sparta",
+    "star nomad raiders",
+    "anti-xeno defense post",
+    "imperium blaster gem prospectors",
+    "abandoned mine squatters",
+    "galactic trade emissaries",
+    "epsilon eridani",
   ];
 
   const cardPool = allCards.filter((card) => {
@@ -42,6 +41,12 @@
       (card.world.type !== "FAR" && card.world.type !== "NEAR")
     );
   });
+  const blueStartWorldPool = cardPool.filter(
+    (card) => card.world?.type === "START_BLUE",
+  );
+  const redStartWorldPool = cardPool.filter(
+    (card) => card.world?.type === "START_RED",
+  );
 
   function generateStartingHand() {
     counter++;
@@ -49,8 +54,12 @@
     const pickedBlueName =
       blueNames[Math.floor(Math.random() * blueNames.length)];
 
-    const redCard = cardPool.find((card) => card.name === pickedRedName);
-    const blueCard = cardPool.find((card) => card.name === pickedBlueName);
+    const redCard = redStartWorldPool.find(
+      (card) => card.name.toLowerCase() === pickedRedName,
+    );
+    const blueCard = blueStartWorldPool.find(
+      (card) => card.name.toLowerCase() === pickedBlueName,
+    );
 
     // grenerate 6 unique random cards from the card pool, excluding the picked start worlds
     let allowNonWorldDuplicate = true; // Set this to false after getting one non world duplicate
@@ -58,12 +67,16 @@
     while (_startingHand.length < 6) {
       const randomCard = cardPool[Math.floor(Math.random() * cardPool.length)];
       if (_startingHand.includes(randomCard)) {
-        // if is a development then allow*
-        if (randomCard.world === undefined && allowNonWorldDuplicate) {
+        // if is a development (but not 6 or 9 cost) then allow*
+        if (
+          randomCard.world === undefined &&
+          randomCard.cost !== 6 &&
+          randomCard.cost !== 9 &&
+          allowNonWorldDuplicate
+        ) {
           allowNonWorldDuplicate = false;
         } else continue;
-      }
-      if (randomCard === redCard || randomCard === blueCard) continue;
+      } else if (randomCard === redCard || randomCard === blueCard) continue;
       _startingHand.push(randomCard);
     }
     pickedStartWorlds = [redCard!, blueCard!];
@@ -94,7 +107,7 @@
               src={card.src}
               alt={card.name}
               title={card.name}
-              in:fade={{ duration: 150 }}
+              in:scale={{ delay: index * 80, duration: 300 }}
             />
           {/each}
         </div>
@@ -106,7 +119,7 @@
               src={card.src}
               alt={card.name}
               title={card.name}
-              in:fade={{ duration: 150 }}
+              in:scale={{ delay: (index + 1) * 80, duration: 300 }}
             />
           {/each}
         </div>
@@ -121,15 +134,19 @@
     padding: 8px 16px;
     margin: 20px 0;
     background-color: #aa7013;
+    background: linear-gradient(90deg, #aa7013 0%, #c3892c 35%, #aa7013 100%);
     color: white;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: transform 0.05s linear;
   }
 
   button:hover {
     cursor: pointer;
-    background-color: #ca881d;
+  }
+
+  button:active {
+    transform: scale(0.92);
   }
 
   .modal {
@@ -138,8 +155,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 24px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 16px;
   }
 
   .modal-content {
@@ -179,15 +196,16 @@
     max-width: 150px;
     height: auto;
     display: block;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 
   .button-row {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 16px;
     flex-wrap: wrap;
+  }
+  .button-row button {
+    margin: 10px 0;
   }
 
   @media (max-width: 768px) {

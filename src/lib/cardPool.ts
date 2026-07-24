@@ -2294,7 +2294,7 @@ export const allCards: Card[] = [
     name: "Trade League",
     cost: 6,
     vp: "?",
-    powers: ["$"],
+    powers: ["$", "IV"],
   },
   {
     src: "cards/uplift-bio-engineers.jpg",
