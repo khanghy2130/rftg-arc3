@@ -4,6 +4,8 @@
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
 
+  import StartHandModal from "$lib/StartHandModal.svelte";
+
   let columnsPerRow = $state(5);
   let searchTerm = $state("");
   let showDevDuplicates = $state(false);
@@ -264,6 +266,7 @@
       target="_blank">Galactic Survey RFTGPics</a
     >.
   </p>
+  <StartHandModal />
 
   <div class="filters-section">
     {#each Object.keys(filterGroups) as (keyof typeof filterGroups)[] as groupName}
