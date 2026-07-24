@@ -4,7 +4,7 @@
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
 
-  let columnsPerRow = $state(8);
+  let columnsPerRow = $state(5);
   let searchTerm = $state("");
   let showDevDuplicates = $state(false);
   let activeTags: string[] = $state([]);
@@ -26,7 +26,7 @@
       "Near Frontier",
       "Far Frontier",
       "Start Worlds",
-      "Non-frontier Worlds",
+      "Normal Worlds",
     ],
     "Cost / Defense": Array.from(
       { length: 11 },
@@ -97,9 +97,8 @@
       const activeWorldTypeTags = activeTags.filter((tag) =>
         filterGroups["World Type"].includes(tag),
       );
-      if (activeWorldTypeTags.length > 0) {
-        // must be world
-        // if (card.world === undefined) return false;
+      // developments can pass
+      if (activeWorldTypeTags.length > 0 && card.world !== undefined) {
         const matchesWorldType = activeWorldTypeTags.some((tag) => {
           if (tag === "Near Frontier") {
             return card.world?.type === "NEAR";
@@ -113,7 +112,7 @@
               card.world?.type === "START_RED"
             );
           }
-          if (tag === "Non-frontier Worlds") {
+          if (tag === "Normal Worlds") {
             return card.world?.type === undefined;
           }
         });
