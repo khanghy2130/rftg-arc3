@@ -9,6 +9,7 @@
   let columnsPerRow = $state(5);
   let searchTerm = $state("");
   let showDevDuplicates = $state(false);
+  let exclusionEnabled = $state(false);
   let activeTags: string[] = $state([]);
 
   const filterGroups = {
@@ -42,6 +43,10 @@
     "Good Color": ["gray", "blue", "brown", "green", "yellow"],
     "Production / Windfall": ["Production", "Windfall"],
   };
+
+  const hasSameItems = <T,>(arr1: T[], arr2: T[]): boolean =>
+    arr1.length === arr2.length &&
+    arr1.every((item) => new Set(arr2).has(item));
 
   let results: Card[] = $derived.by(() => {
     if (activeTags.length === 0 && searchTerm.trim() === "") {
@@ -153,6 +158,10 @@
       );
       if (activeKeywordTags.length > 0) {
         if (!card.keywords) return false; // card has no keywords
+        // exclusion mode
+        if (exclusionEnabled) {
+          if (!hasSameItems(card.keywords, activeKeywordTags)) return false;
+        }
         const matchesKeyword = activeKeywordTags.some((tag) => {
           return card.keywords?.includes(tag as Keyword);
         });
@@ -164,6 +173,10 @@
         filterGroups["Phase Power"].includes(tag),
       );
       if (activePhaseTags.length > 0) {
+        // exclusion mode
+        if (exclusionEnabled) {
+          if (!hasSameItems(card.powers, activePhaseTags)) return false;
+        }
         const matchesPhase = activePhaseTags.some((tag) => {
           return card.powers.includes(tag as Power);
         });
@@ -246,7 +259,7 @@
 <div class="container">
   <h1 id="PageTitle">Card Gallery - Race for the Galaxy Arc 3</h1>
   <p>
-    Fan-made card library for <a
+    Fan-made card gallery for <a
       href="https://boardgamegeek.com/boardgame/28143"
       target="_blank">Race for the Galaxy 2nd Edition</a
     >, a card game published by Rio Grande Games, including the Arc 3
@@ -325,11 +338,21 @@
         >Show development duplicates</label
       >
     </div>
+    <div>
+      <input
+        type="checkbox"
+        id="exclusionEnabled"
+        bind:checked={exclusionEnabled}
+      />
+      <label for="exclusionEnabled" style="cursor: pointer;"
+        >Match exact selected keywords and phases</label
+      >
+    </div>
   </div>
 
   <div class="slider-section">
     <label for="columnsSlider"
-      >Columns per row: <span class="slider-value">{columnsPerRow}</span></label
+      >Columns: <span class="slider-value">{columnsPerRow}</span></label
     >
     <input
       id="columnsSlider"
