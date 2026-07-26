@@ -4,9 +4,6 @@
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
 
-  import Icon from "svelte-awesome";
-  import plusCircle from "svelte-awesome/icons/plusCircle";
-
   import StartHandModal from "$lib/StartHandModal.svelte";
   import CustomListsModal from "$lib/CustomListsModal.svelte";
   import { onMount } from "svelte";
@@ -15,7 +12,6 @@
   let searchTerm = $state("");
   let showAdvanceOptions = $state(false);
   let showDevDuplicates = $state(false);
-  let exactModeEnabled = $state(false);
   let activeTags: string[] = $state([]);
 
   // load from local storage
@@ -80,10 +76,6 @@
     ],
     "Exclude Phase Power": ["No I", "No II", "No III", "No $", "No IV", "No V"],
   };
-
-  const hasSameItems = <T,>(arr1: T[], arr2: T[]): boolean =>
-    arr1.length === arr2.length &&
-    arr1.every((item) => new Set(arr2).has(item));
 
   let results: Card[] = $derived.by(() => {
     if (activeTags.length === 0 && searchTerm.trim() === "") {
@@ -195,10 +187,6 @@
       );
       if (activeKeywordTags.length > 0) {
         if (!card.keywords) return false; // card has no keywords
-        // exact mode
-        if (exactModeEnabled) {
-          if (!hasSameItems(card.keywords, activeKeywordTags)) return false;
-        }
         const matchesKeyword = activeKeywordTags.some((tag) => {
           return card.keywords?.includes(tag as Keyword);
         });
@@ -224,10 +212,6 @@
         filterGroups["Phase Power"].includes(tag),
       );
       if (activePhaseTags.length > 0) {
-        // exact mode
-        if (exactModeEnabled) {
-          if (!hasSameItems(card.powers, activePhaseTags)) return false;
-        }
         const matchesPhase = activePhaseTags.some((tag) => {
           return card.powers.includes(tag as Power);
         });
@@ -429,16 +413,6 @@
     <div>
       <input
         type="checkbox"
-        id="exactModeEnabled"
-        bind:checked={exactModeEnabled}
-      />
-      <label for="exactModeEnabled" style="cursor: pointer;"
-        >Match exact selected keywords and phases</label
-      >
-    </div>
-    <div>
-      <input
-        type="checkbox"
         id="showDevDuplicates"
         bind:checked={showDevDuplicates}
       />
@@ -463,13 +437,13 @@
   </div>
 
   <div>
+    <p class="result-count">Click a card to add to lists</p>
     <p class="result-count">{results.length} results</p>
   </div>
 
   <div class="results-section" style="--columns: {columnsPerRow}">
     {#each results as card, index (index)}
       <div class="card-container">
-        <img src={card.src} alt={card.name} title={card.name} />
         <button
           class="add-btn"
           onclick={() => {
@@ -477,7 +451,7 @@
             showCustomListsModal = true;
           }}
         >
-          <Icon data={plusCircle} scale={3} />
+          <img src={card.src} alt={card.name} title={card.name} />
         </button>
       </div>
     {/each}
@@ -666,21 +640,10 @@
     display: block;
   }
   .add-btn {
-    display: none;
-    position: absolute;
     background: none;
-    color: white;
     border: none;
+    padding: 0;
     transition: none;
-    inset: 0;
-    place-self: center;
-  }
-  .add-btn:hover {
-    background: none;
-    color: #d5d5d5;
-  }
-  .card-container:hover .add-btn {
-    display: block;
   }
 
   .slider-section {

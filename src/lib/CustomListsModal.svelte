@@ -337,6 +337,7 @@
   .adding-preview-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 14px;
   }
   .adding-preview-container img {
     width: 50%;
