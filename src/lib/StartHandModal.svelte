@@ -61,7 +61,7 @@
       (card) => card.name.toLowerCase() === pickedBlueName,
     );
 
-    // grenerate 6 unique random cards from the card pool, excluding the picked start worlds
+    // generate 6 unique random cards from the card pool, excluding the picked start worlds
     let allowNonWorldDuplicate = true; // Set this to false after getting one non world duplicate
     const _startingHand: Card[] = [];
     while (_startingHand.length < 6) {
@@ -85,7 +85,6 @@
 </script>
 
 <button
-  id="open-modal-button"
   onclick={() => {
     modalOpen = true;
     generateStartingHand();
@@ -133,8 +132,9 @@
     font-size: 20px;
     padding: 8px 16px;
     margin: 20px 0;
+    margin-right: 20px;
     background-color: #aa7013;
-    background: linear-gradient(90deg, #aa7013 0%, #c3892c 35%, #aa7013 100%);
+    background: linear-gradient(90deg, #aa7013 0%, #c68a2a 35%, #905e0c 100%);
     color: white;
     border: none;
     border-radius: 5px;
@@ -144,7 +144,6 @@
   button:hover {
     cursor: pointer;
   }
-
   button:active {
     transform: scale(0.92);
   }

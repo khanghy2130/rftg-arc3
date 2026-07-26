@@ -1,16 +1,39 @@
 <script lang="ts">
   import { allCards } from "$lib/cardPool";
-  import type { Card, World, Power, Keyword } from "$lib";
+  import type { Card, World, Power, Keyword, CustomList } from "$lib";
   import { fly } from "svelte/transition";
   import { flip } from "svelte/animate";
 
+  import Icon from "svelte-awesome";
+  import plusCircle from "svelte-awesome/icons/plusCircle";
+
   import StartHandModal from "$lib/StartHandModal.svelte";
+  import CustomListsModal from "$lib/CustomListsModal.svelte";
+  import { onMount } from "svelte";
 
   let columnsPerRow = $state(5);
   let searchTerm = $state("");
+  let showAdvanceOptions = $state(false);
   let showDevDuplicates = $state(false);
-  let exclusionEnabled = $state(false);
+  let exactModeEnabled = $state(false);
   let activeTags: string[] = $state([]);
+
+  // load from local storage
+  let customLists: CustomList[] = $state([]);
+  let showCustomListsModal = $state(false);
+  let selectedCard: Card | null = $state(null);
+
+  onMount(() => {
+    try {
+      const raw = localStorage.getItem("customLists");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) customLists = parsed;
+      }
+    } catch (e) {
+      console.error("Failed to load customLists", e);
+    }
+  });
 
   const filterGroups = {
     Set: ["Base", "Xeno Invasion", "Xeno Counterstrike"],
@@ -42,6 +65,20 @@
     "Phase Power": ["I", "II", "III", "$", "IV", "V"],
     "Good Color": ["gray", "blue", "brown", "green", "yellow"],
     "Production / Windfall": ["Production", "Windfall"],
+  };
+
+  const advanceFilterGroups = {
+    "Exclude Keywords": [
+      "No CHROMO",
+      "No ANTI-XENO",
+      "No XENO",
+      "No UPLIFT",
+      "No REBEL",
+      "No IMPERIUM",
+      "No ALIEN",
+      "No TERRAFORMING",
+    ],
+    "Exclude Phase Power": ["No I", "No II", "No III", "No $", "No IV", "No V"],
   };
 
   const hasSameItems = <T,>(arr1: T[], arr2: T[]): boolean =>
@@ -158,8 +195,8 @@
       );
       if (activeKeywordTags.length > 0) {
         if (!card.keywords) return false; // card has no keywords
-        // exclusion mode
-        if (exclusionEnabled) {
+        // exact mode
+        if (exactModeEnabled) {
           if (!hasSameItems(card.keywords, activeKeywordTags)) return false;
         }
         const matchesKeyword = activeKeywordTags.some((tag) => {
@@ -168,19 +205,45 @@
         if (!matchesKeyword) return false;
       }
 
+      // Exclude keywords
+      const activeExcludeKeywordTags = activeTags.filter((tag) =>
+        advanceFilterGroups["Exclude Keywords"].includes(tag),
+      );
+      if (activeExcludeKeywordTags.length > 0) {
+        if (card.keywords) {
+          const matchesKeyword = activeExcludeKeywordTags.some((tag) => {
+            // slice(3) removes "No "
+            return card.keywords?.includes(tag.slice(3) as Keyword);
+          });
+          if (matchesKeyword) return false;
+        }
+      }
+
       // Phase with powers
       const activePhaseTags = activeTags.filter((tag) =>
         filterGroups["Phase Power"].includes(tag),
       );
       if (activePhaseTags.length > 0) {
-        // exclusion mode
-        if (exclusionEnabled) {
+        // exact mode
+        if (exactModeEnabled) {
           if (!hasSameItems(card.powers, activePhaseTags)) return false;
         }
         const matchesPhase = activePhaseTags.some((tag) => {
           return card.powers.includes(tag as Power);
         });
         if (!matchesPhase) return false;
+      }
+
+      // Exclude phase
+      const activeExcludePhaseTags = activeTags.filter((tag) =>
+        advanceFilterGroups["Exclude Phase Power"].includes(tag),
+      );
+      if (activeExcludePhaseTags.length > 0) {
+        const matchesPhase = activeExcludePhaseTags.some((tag) => {
+          // slice(3) removes "No "
+          return card.powers.includes(tag.slice(3) as Power);
+        });
+        if (matchesPhase) return false;
       }
 
       // Good Color
@@ -279,7 +342,14 @@
       target="_blank">Galactic Survey RFTGPics</a
     >.
   </p>
-  <StartHandModal />
+  <div class="feature-buttons-container">
+    <StartHandModal />
+    <CustomListsModal
+      bind:customLists
+      bind:open={showCustomListsModal}
+      {selectedCard}
+    />
+  </div>
 
   <div class="filters-section">
     {#each Object.keys(filterGroups) as (keyof typeof filterGroups)[] as groupName}
@@ -298,6 +368,24 @@
         </div>
       </div>
     {/each}
+    {#if showAdvanceOptions}
+      {#each Object.keys(advanceFilterGroups) as (keyof typeof advanceFilterGroups)[] as groupName}
+        <div class="filter-group">
+          <div class="filter-group-label">{groupName}</div>
+          <div class="tag-row">
+            {#each advanceFilterGroups[groupName] as tag}
+              <button
+                type="button"
+                class:selected={activeTags.includes(tag)}
+                onclick={() => toggleTag(tag)}
+              >
+                {tag}
+              </button>
+            {/each}
+          </div>
+        </div>
+      {/each}
+    {/if}
   </div>
 
   <div class="active-tags-section">
@@ -331,21 +419,31 @@
     <div>
       <input
         type="checkbox"
-        id="showDevDuplicates"
-        bind:checked={showDevDuplicates}
+        id="showAdvanceOptions"
+        bind:checked={showAdvanceOptions}
       />
-      <label for="showDevDuplicates" style="cursor: pointer;"
-        >Show development duplicates</label
+      <label for="showAdvanceOptions" style="cursor: pointer;"
+        >Show advance options</label
       >
     </div>
     <div>
       <input
         type="checkbox"
-        id="exclusionEnabled"
-        bind:checked={exclusionEnabled}
+        id="exactModeEnabled"
+        bind:checked={exactModeEnabled}
       />
-      <label for="exclusionEnabled" style="cursor: pointer;"
+      <label for="exactModeEnabled" style="cursor: pointer;"
         >Match exact selected keywords and phases</label
+      >
+    </div>
+    <div>
+      <input
+        type="checkbox"
+        id="showDevDuplicates"
+        bind:checked={showDevDuplicates}
+      />
+      <label for="showDevDuplicates" style="cursor: pointer;"
+        >Show development duplicates</label
       >
     </div>
   </div>
@@ -370,7 +468,18 @@
 
   <div class="results-section" style="--columns: {columnsPerRow}">
     {#each results as card, index (index)}
-      <img src={card.src} alt={card.name} title={card.name} />
+      <div class="card-container">
+        <img src={card.src} alt={card.name} title={card.name} />
+        <button
+          class="add-btn"
+          onclick={() => {
+            selectedCard = card;
+            showCustomListsModal = true;
+          }}
+        >
+          <Icon data={plusCircle} scale={3} />
+        </button>
+      </div>
     {/each}
   </div>
 </div>
@@ -413,11 +522,17 @@
     color: #f7bb59;
     margin-bottom: 18px;
     font-size: 2rem;
-    background: linear-gradient(90deg, #aa7013 0%, #f7bb59 35%, #aa7013 100%);
+    background: linear-gradient(90deg, #aa7013 0%, #ffc66a 35%, #aa7013 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
+  }
+
+  .feature-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
   }
 
   .search-section {
@@ -542,6 +657,30 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+  }
+
+  .card-container {
+    position: relative;
+  }
+  .card-container img {
+    display: block;
+  }
+  .add-btn {
+    display: none;
+    position: absolute;
+    background: none;
+    color: white;
+    border: none;
+    transition: none;
+    inset: 0;
+    place-self: center;
+  }
+  .add-btn:hover {
+    background: none;
+    color: #d5d5d5;
+  }
+  .card-container:hover .add-btn {
+    display: block;
   }
 
   .slider-section {

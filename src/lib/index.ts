@@ -26,3 +26,8 @@ export interface Card {
   world?: World;
   set?: "xi" | "xc";
 }
+
+export interface CustomList {
+  title: string;
+  cardNames: string[];
+}
