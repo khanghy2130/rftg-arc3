@@ -64,6 +64,7 @@
   };
 
   const advanceFilterGroups = {
+    "Exclude Phase Power": ["No I", "No II", "No III", "No $", "No IV", "No V"],
     "Exclude Keywords": [
       "No CHROMO",
       "No ANTI-XENO",
@@ -74,7 +75,6 @@
       "No ALIEN",
       "No TERRAFORMING",
     ],
-    "Exclude Phase Power": ["No I", "No II", "No III", "No $", "No IV", "No V"],
   };
 
   let results: Card[] = $derived.by(() => {
@@ -309,8 +309,7 @@
     Fan-made card gallery for <a
       href="https://boardgamegeek.com/boardgame/28143"
       target="_blank">Race for the Galaxy 2nd Edition</a
-    >, a card game published by Rio Grande Games, including the Arc 3
-    expansions:
+    >, including Arc 3 expansions:
     <a
       href="https://boardgamegeek.com/boardgameexpansion/161599/"
       target="_blank">Xeno Invasion</a

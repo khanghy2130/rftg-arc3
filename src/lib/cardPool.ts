@@ -41,11 +41,11 @@ export const allCards: Card[] = [
     set: "xc",
   },
   {
-    src: "cards/xeno-occupied-rebel-supply.jpg",
-    name: "xeno-occupied rebel supply",
-    keywords: ["XENO", "REBEL"],
-    cost: 5,
-    vp: 3,
+    src: "cards/outlaw-rebel-mines.jpg",
+    name: "outlaw rebel mines",
+    keywords: ["REBEL"],
+    cost: 2,
+    vp: 2,
     powers: ["III", "V"],
     world: {
       good: "RARE",
@@ -55,11 +55,11 @@ export const allCards: Card[] = [
     set: "xc",
   },
   {
-    src: "cards/outlaw-rebel-mines.jpg",
-    name: "outlaw rebel mines",
-    keywords: ["REBEL"],
-    cost: 2,
-    vp: 2,
+    src: "cards/xeno-occupied-rebel-supply.jpg",
+    name: "xeno-occupied rebel supply",
+    keywords: ["XENO", "REBEL"],
+    cost: 5,
+    vp: 3,
     powers: ["III", "V"],
     world: {
       good: "RARE",
